@@ -13,21 +13,25 @@ namespace oop_tests.shapes
 
     class Rectangl : Shape
     {
+        public int Heght;
+        public int Weight;
 
-        public int Heght = 50;
-        public int Weight = 50;
+        public Point[] PointCoordinate = new Point[4];
 
         public Rectangl()
         {
-
+           
         }
 
-        public Rectangl(string name, Color colors, int height, int weight)
+        public Rectangl(string name, Color colors, Point BasePoint , int weight, int height)
         {
             Color = colors;
             Name = name;
             Heght = height;
             Weight = weight;
+
+            PointCoordinate[0].X = BasePoint.X;
+            PointCoordinate[0].Y = BasePoint.Y;
 
             PointCoordinate[1].X = BasePoint.X - weight;
             PointCoordinate[1].Y = BasePoint.Y;
@@ -37,14 +41,23 @@ namespace oop_tests.shapes
 
             PointCoordinate[3].X = BasePoint.X;
             PointCoordinate[3].Y = BasePoint.Y - height;
-
         }
 
         public override void Draw(Shape shape, ref Canvas myCanvas, Point BasePoint)
         {
-            //myCanvas.Children.Add(rectangle);
+            SolidColorBrush brush = new SolidColorBrush(Color);
+            Polygon polygon = new Polygon()
+            {
+                Stroke = brush,
+                StrokeThickness = 1,
 
-            base.Draw(shape, ref myCanvas, BasePoint);
+            };
+
+            for (int i = 0; i < PointCoordinate.Length; i++)
+                polygon.Points.Add(PointCoordinate[i]);
+
+            this.BasePoint = BasePoint;
+            myCanvas.Children.Add(polygon);
         }
     }
 }

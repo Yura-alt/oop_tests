@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace oop_tests.shapes
 {
     class Triangl :Shape
     {
+        public Point[] PointCoordinate = new Point[3];
 
         public Triangl()
         {
@@ -32,7 +34,6 @@ namespace oop_tests.shapes
                 {
                     PointCoordinate[i / 2].Y = item;
                 }
-                
                 i++;
             }
         }
@@ -40,7 +41,18 @@ namespace oop_tests.shapes
         public override void Draw(Shape shape, ref Canvas myCanvas, Point BasePoint)
         {
 
-            base.Draw(shape, ref myCanvas, BasePoint);
+            SolidColorBrush brush = new SolidColorBrush(Color);
+            Polygon polygon = new Polygon()
+            {
+                Stroke = brush,
+                StrokeThickness = 1,
+            };
+
+            for (int i = 0; i < PointCoordinate.Length; i++)
+                polygon.Points.Add(PointCoordinate[i]);
+            
+            this.BasePoint = BasePoint;
+            myCanvas.Children.Add(polygon);
         }
     }
 }

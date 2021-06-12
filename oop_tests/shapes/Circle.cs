@@ -12,8 +12,8 @@ namespace oop_tests.shapes
 {
     class Circle : Shape
     {
-        public int Heght = 40;
-        public int Weight = 40;
+        public int Heght;
+        public int Weight;
 
         public  Circle()
         {
@@ -38,13 +38,10 @@ namespace oop_tests.shapes
                 Width = Heght,
 
             };
+            BasePoint = point;
             Canvas.SetLeft(ellipse, point.X - ellipse.Height / 2);
             Canvas.SetTop(ellipse, point.Y - ellipse.Height / 2);
-
-            RandomShape = ellipse;
-
-            myCanvas.Children.Add(ellipse);
-           
+            myCanvas.Children.Add(ellipse); 
         }
 
     }
