@@ -20,14 +20,16 @@ namespace oop_tests.shapes
            
         }
 
-        public Circle(string name, Color colors,  int height, int weight)
+        public Circle(string name, Color colors,  int height, int weight, Point p)
         {
             Color = colors;
             Name = name;
             Heght = height;
             Weight = weight;
+
+            BasePoint = p;
         }
-        public override void Draw(Shape shape, ref Canvas myCanvas, Point point)
+        public override void Draw( ref Canvas myCanvas)
         {
             SolidColorBrush brush = new SolidColorBrush(Color);
             Ellipse ellipse = new Ellipse
@@ -38,9 +40,10 @@ namespace oop_tests.shapes
                 Width = Heght,
 
             };
-            BasePoint = point;
-            Canvas.SetLeft(ellipse, point.X - ellipse.Height / 2);
-            Canvas.SetTop(ellipse, point.Y - ellipse.Height / 2);
+           
+           // BasePoint = point;
+            Canvas.SetLeft(ellipse, BasePoint.X - ellipse.Height / 2);
+            Canvas.SetTop(ellipse, BasePoint.Y - ellipse.Height / 2);
             myCanvas.Children.Add(ellipse); 
         }
 

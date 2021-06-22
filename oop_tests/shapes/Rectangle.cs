@@ -43,7 +43,7 @@ namespace oop_tests.shapes
             PointCoordinate[3].Y = BasePoint.Y - height;
         }
 
-        public override void Draw(Shape shape, ref Canvas myCanvas, Point BasePoint)
+        public override void Draw(ref Canvas myCanvas)
         {
             SolidColorBrush brush = new SolidColorBrush(Color);
             Polygon polygon = new Polygon()

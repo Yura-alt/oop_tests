@@ -38,7 +38,7 @@ namespace oop_tests.shapes
             }
         }
 
-        public override void Draw(Shape shape, ref Canvas myCanvas, Point BasePoint)
+        public override void Draw( ref Canvas myCanvas)
         {
 
             SolidColorBrush brush = new SolidColorBrush(Color);

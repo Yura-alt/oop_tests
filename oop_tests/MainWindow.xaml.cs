@@ -24,7 +24,7 @@ namespace oop_tests
     public partial class MainWindow : Window
     {
 
-        List<Shape> shapesList = new List<Shape>();
+         List<Shape> shapesList = new List<Shape>();
 
         DispatcherTimer timerW = new DispatcherTimer();
         int tic = 0;
@@ -34,7 +34,7 @@ namespace oop_tests
         {
             InitializeComponent();
             timerW.Tick += new EventHandler(TimerW_Tick);
-            timerW.Interval = new TimeSpan(0, 0, 1);
+            timerW.Interval = new TimeSpan(0, 0, 0, 0, 100);
 
         }
 
@@ -45,7 +45,7 @@ namespace oop_tests
                 tic = 0;
                 timerW.Stop();
             } 
-            shapesList[tic].Draw(shapesList[tic], ref myCanvas, shapesList[tic].BasePoint);
+            shapesList[tic].Draw(ref myCanvas);
             tic++;
         }
 
@@ -63,7 +63,7 @@ namespace oop_tests
             // Shape.BasePoint = point;
 
 
-            Circle circle = new Circle("Круг", Colors.DarkGray, 100, 100);
+            Circle circle = new Circle("Круг", Colors.DarkGray, 100, 100, point);
 
             Rectangl rectangle = new Rectangl("Прямоугольник", Colors.Red, point, 100, 200);
 
@@ -76,13 +76,13 @@ namespace oop_tests
             switch (caseSwitch)
             {
                 case 1:
-                    triangle.Draw(triangle, ref myCanvas, point);
+                    triangle.Draw(ref myCanvas);
                     break;
                 case 2:
-                    circle.Draw(circle, ref myCanvas, point);
+                    circle.Draw(ref myCanvas);
                     break;
                 default:
-                    rectangle.Draw(rectangle, ref myCanvas, point);
+                    rectangle.Draw( ref myCanvas);
                     break;
             }
         } // событие обработки на холсте не срабатывают 
@@ -107,7 +107,7 @@ namespace oop_tests
 
             Random rnd = new Random();
 
-            Circle circle = new Circle("Круг", Colors.DarkGray, rnd.Next(10, canvasWeight - (int)point.X), rnd.Next(10, canvasHeight - (int)point.Y));
+            Circle circle = new Circle("Круг", Colors.DarkGray, rnd.Next(10, canvasWeight - (int)point.X), rnd.Next(10, canvasHeight - (int)point.Y), point);
             Rectangl rectangle = new Rectangl("Прямоугольник", Colors.Red, point, rnd.Next(10, canvasWeight - (int)point.X), rnd.Next(10, canvasHeight - (int)point.Y));
             Triangl triangle = new Triangl("Треугольник", Colors.Blue, (int)point.X, (int)point.Y, rnd.Next(10, canvasWeight - (int)point.X), rnd.Next(10, canvasHeight - (int)point.Y), rnd.Next(10, canvasWeight - (int)point.X), rnd.Next(10, canvasHeight - (int)point.Y));
 
@@ -115,15 +115,15 @@ namespace oop_tests
             switch (caseSwitch)
             {
                 case 1:
-                    triangle.Draw(triangle, ref myCanvas, point);
+                    triangle.Draw(ref myCanvas);
                     shapesList.Add(triangle);
                     break;
                 case 2:
-                    circle.Draw(circle, ref myCanvas, point);
+                    circle.Draw(ref myCanvas);
                     shapesList.Add(circle);
                     break;
                 default:
-                    rectangle.Draw(rectangle, ref myCanvas, point);
+                    rectangle.Draw(ref myCanvas);
                     shapesList.Add(rectangle);
                     break;
             }
