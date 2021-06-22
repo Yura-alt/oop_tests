@@ -40,8 +40,6 @@ namespace oop_tests.shapes
                 Width = Heght,
 
             };
-           
-           // BasePoint = point;
             Canvas.SetLeft(ellipse, BasePoint.X - ellipse.Height / 2);
             Canvas.SetTop(ellipse, BasePoint.Y - ellipse.Height / 2);
             myCanvas.Children.Add(ellipse); 

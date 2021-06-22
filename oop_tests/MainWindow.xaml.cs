@@ -18,13 +18,12 @@ using System.Windows.Threading;
 
 namespace oop_tests
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+    
+ 
     public partial class MainWindow : Window
     {
-
-         List<Shape> shapesList = new List<Shape>();
+        bool flag = false;
+        List<Shape> shapesList = new List<Shape>();
 
         DispatcherTimer timerW = new DispatcherTimer();
         int tic = 0;
@@ -34,19 +33,23 @@ namespace oop_tests
         {
             InitializeComponent();
             timerW.Tick += new EventHandler(TimerW_Tick);
-            timerW.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerW.Interval = new TimeSpan(0, 0, 0, 0, 16);
 
         }
 
         private void TimerW_Tick(object sender, EventArgs e)
         {
+            shapesList[tic].Draw(ref myCanvas);
+            tic++;
             if (shapesList.Count() == tic)
             {
                 tic = 0;
                 timerW.Stop();
+                shapesList.Clear();
+                flag = true;
+
             } 
-            shapesList[tic].Draw(ref myCanvas);
-            tic++;
+            
         }
 
 
@@ -57,10 +60,10 @@ namespace oop_tests
 
             Point point = new Point();
 
-            point.X = (int)e.GetPosition(null).X - 10; // Почему то происходит смещение относительно указателя мыши и оси х
+            point.X = (int)e.GetPosition(null).X - 10; 
             point.Y = (int)e.GetPosition(null).Y;
 
-            // Shape.BasePoint = point;
+            
 
 
             Circle circle = new Circle("Круг", Colors.DarkGray, 100, 100, point);
@@ -85,7 +88,7 @@ namespace oop_tests
                     rectangle.Draw( ref myCanvas);
                     break;
             }
-        } // событие обработки на холсте не срабатывают 
+        } 
 
         private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -96,6 +99,15 @@ namespace oop_tests
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
+            if (flag == true)
+            {
+                myCanvas.Children.Clear();
+                flag = false;
+            }
+
+           
+
             int canvasWeight = (int)myCanvas.ActualWidth;
             int canvasHeight = (int)myCanvas.ActualHeight;
 
